@@ -1,0 +1,10 @@
+*.ipch
+*.hint
+*.vcxproj.*
+*.vcxproj
+ScatchPacket/x64
+.vs
+x64/
+
+*.dll
+*.lib
