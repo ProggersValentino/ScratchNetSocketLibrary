@@ -1,0 +1,8 @@
+﻿  pch.cpp
+  Address.cpp
+  dllmain.cpp
+  NetSockets.cpp
+  Socket.cpp
+  Generating Code...
+     Creating library C:\LibraryProjects\SocketLibrary\x64\Debug\SocketLibrary.lib and object C:\LibraryProjects\SocketLibrary\x64\Debug\SocketLibrary.exp
+  SocketLibrary.vcxproj -> C:\LibraryProjects\SocketLibrary\x64\Debug\SocketLibrary.dll

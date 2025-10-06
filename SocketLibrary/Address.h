@@ -3,7 +3,7 @@
 #include "pch.h"
 #include <winsock2.h>
 #include <ws2def.h>
-
+#include <iostream>
 
 #define ADDR_EXPORTS
 
@@ -49,6 +49,12 @@ public:
 
     /*get port*/
     unsigned short getPort() const;
+
+    bool operator==(const Address& other) const
+    {
+        return GetAddressFromSockAddrIn() == other.GetAddressFromSockAddrIn()
+            && GetPortFromSockAddrIn() == other.GetPortFromSockAddrIn();
+    }
 
 private:
     unsigned int address;
