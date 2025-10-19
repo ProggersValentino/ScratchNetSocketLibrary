@@ -10,7 +10,7 @@ Address::Address() : sockAddr{} //zero out the socket address
     sockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
     sockAddr.sin_port = htons(port);
 
-    address = htonl(INADDR_ANY);
+    address = sockAddr.sin_addr.s_addr;
 }
 
 Address::Address(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned short p) : sockAddr{} //zero out the socket address
@@ -44,7 +44,7 @@ Address::Address(unsigned short port) : sockAddr{} //zero out the socket address
     sockAddr.sin_addr.s_addr = htonl(INADDR_ANY);
     sockAddr.sin_port = htons(port);
 
-    address = htonl(INADDR_ANY);
+    address = sockAddr.sin_addr.s_addr;
 
 }
 
@@ -91,6 +91,11 @@ unsigned char Address::GetD() const
 unsigned short Address::getPort() const
 {
     return port;
+}
+
+void Address::SetAddress(unsigned int value)
+{
+    address = value;
 }
 
 extern "C" {

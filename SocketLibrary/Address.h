@@ -50,6 +50,8 @@ public:
     /*get port*/
     unsigned short getPort() const;
 
+    void SetAddress(unsigned int value);
+
     bool operator==(const Address& other) const
     {
         return GetAddressFromSockAddrIn() == other.GetAddressFromSockAddrIn()
