@@ -48,7 +48,8 @@ bool Socket::OpenSock(unsigned short port, bool bindSock)
 
     if (ioctlsocket(handle, FIONBIO, &nonBlocking) != 0)
     {
-        std::cout << "ioctlsocket failed. failed to set socket to non-blocking" << std::endl;
+        int errCode = WSAGetLastError();
+        std::cout << "ioctlsocket failed. failed to set socket to non-blocking due to: " << errCode << std::endl;
         return false;
     }
 
@@ -129,7 +130,9 @@ int Socket::Receive(Address& sender, void* data, int size)
     int bytes = recvfrom(handle, (char*)data, size, 0, (SOCKADDR*)&from, &from_len);
     int error = WSAGetLastError();
 
-    if (bytes == SOCKET_ERROR && error != 10054 && error != 10035) //we ignore 10054 as its normal in UDP connections as well as 10035 as we have set it as nonblocking and are waiting for data
+    ///error 10022 to prevent it complaining about clients that dont manually have their sockets bound --> this should be fixed with NAT punchthrough
+    ///We ignore 10054 as its normal in UDP connections as well as 10035 as we have set it as nonblocking and are waiting for data
+    if (bytes == SOCKET_ERROR && error != 10054 && error != 10035 && error != 10022) 
     {
         printf("Failed to recieve message under this error: %d", error);
         return 0;
